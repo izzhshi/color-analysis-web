@@ -1,0 +1,158 @@
+body {
+    font-family: "Jua";
+    margin: 0;
+    padding-bottom: 50px;
+    text-align: center;
+    background: linear-gradient(to bottom, #ffb6c1, #fff5f8);
+    color: #333;
+}
+
+.jua-regular {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container2 {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: justify;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+    transform: scaleX(-1);
+    border: 3px solid #ff69b4;
+}
+
+button {
+    margin: 10px;
+    padding: 12px 20px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    font-family: "Jua";
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: #ff1493;
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none;
+}
+
+#loading-spinner {
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: "Jua";
+    color: #ff4500;
+}
+
+#color-palette {
+    margin-top: 20px;
+    display: flex;
+    font-family: "Jua";
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.color-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background-color: #FFFFE0;
+    color: orange;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+}
+
+/* Welcome Page - Fullscreen Layout */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background: linear-gradient(to bottom, #ff69b4, #ffb6c1);
+    color: white;
+    font-family: "Jua", sans-serif;
+    padding: 20px;
+}
+
+/* Title */
+.welcome-container h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Subtitle */
+.welcome-container p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Start Button */
+.start-btn {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    font-family: "Jua", sans-serif;
+    color: white;
+    background: #ff1493;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.start-btn:hover {
+    background: #ff007f;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .welcome-container h1 {
+        font-size: 2.5rem;
+    }
+    .welcome-container p {
+        font-size: 1rem;
+    }
+    .start-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Satisfy&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Analysis - Main</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="container">
+            <h1>Color Analysis</h1>
+            <video id="camera" autoplay></video>
+            <button id="capture">Capture</button>
+            <canvas id="canvas" class="hidden"></canvas>
+            <div id="loading-spinner" class="hidden">Processing...</div>
+            <h2 id="result"></h2>
+            <h2 id="color-title" class="hidden">Suggested Colors</h2>
+            <div id="color-palette"></div>
+        </div>
+
+        <div class="container2">
+            <div id="guidelines">
+                <h2>For Accurate Results:</h2>
+                <ul>
+                    <li>Use <strong>natural daylight</strong> for the best accuracy.</li>
+                    <li>Avoid artificial lighting and harsh shadows.</li>
+                    <li>Face the camera <strong>directly</strong> with your entire face visible.</li>
+                    <li>Ensure a <strong>plain, neutral background</strong> (white or grey is best).</li>
+                    <li>Remove makeup, glasses, and accessories to prevent interference.</li>
+                    <li>Tie back hair to fully expose the forehead and face.</li>
+                    <li>Wear neutral-colored clothing to avoid color reflection.</li>
+                    <li>Stay still while capturing for a clear image.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection"></script>
+</body>
+<footer>
+    <p>by izzhshi @241.wav</p>
+</footer>
+</html>
