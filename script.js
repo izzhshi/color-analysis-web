@@ -7,33 +7,41 @@ const resultDiv = document.getElementById("result");
 const colorPaletteDiv = document.getElementById("color-palette");
 const welcomeScreen = document.getElementById("welcome-screen");
 const startBtn = document.getElementById("start-btn");
+const appContainer = document.getElementById("app-container");
 
 // Hide welcome screen and show main content
 document.addEventListener("DOMContentLoaded", () => {
-    const startBtn = document.getElementById("start-btn");
-    const welcomeScreen = document.getElementById("welcome-screen");
-    const appContainer = document.getElementById("app-container");
-    
     startBtn.addEventListener("click", () => {
         welcomeScreen.classList.add("hidden");
         appContainer.classList.remove("hidden");
     });
 });
 
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-        video.srcObject = stream;
-        video.play();
-        startFaceDetection(); // Start face detection
-    })
-    .catch(err => console.error("Camera access denied", err));
+// Ensure video element has playsinline for iOS compatibility
+video.setAttribute("playsinline", true);
+video.setAttribute("autoplay", true);
+video.setAttribute("muted", true);
+
+navigator.mediaDevices.getUserMedia({
+    video: { facingMode: "user" } // Ensure it works properly on iOS
+})
+.then(stream => {
+    video.srcObject = stream;
+    video.play();
+    startFaceDetection(); // Start face detection
+})
+.catch(err => console.error("Camera access denied", err));
 
 captureBtn.addEventListener("click", () => {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    loadingSpinner.classList.remove("hidden");
-    analyzeSkinTone();
+    if (video.videoWidth > 0 && video.videoHeight > 0) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        loadingSpinner.classList.remove("hidden");
+        analyzeSkinTone();
+    } else {
+        console.error("Video not ready for capture.");
+    }
 });
 
 function analyzeSkinTone() {
@@ -71,7 +79,7 @@ function displayColorPalette(season) {
         "Winter": ["#708090", "#2F4F4F", "#778899", "#4682B4", "#8A2BE2", "#DC143C"],
         "Neutral Season": ["#B0A394", "#8D7B68", "#D9C6A1", "#C0C0C0", "#A9A9A9", "#808080"]
     };
-    
+
     if (palettes[season]) {
         palettes[season].forEach(color => {
             const colorBox = document.createElement("div");
@@ -90,20 +98,27 @@ function displayColorPalette(season) {
 }
 
 // Initialize MediaPipe Face Detection
-const faceDetection = new faceDetection.FaceDetector({
-    model: "short",
-    minDetectionConfidence: 0.5,
-});
+async function startFaceDetection() {
+    try {
+        const faceDetection = new faceDetection.FaceDetector({
+            model: "short",
+            minDetectionConfidence: 0.5,
+        });
 
-function startFaceDetection() {
-    async function detectFace() {
-        const faces = await faceDetection.detect(video);
-        if (faces.length > 0) {
-            console.log("Face detected:", faces);
-        } else {
-            console.log("No face detected.");
+        async function detectFace() {
+            if (video.readyState >= 2) {
+                const faces = await faceDetection.detect(video);
+                if (faces.length > 0) {
+                    console.log("Face detected:", faces);
+                } else {
+                    console.log("No face detected.");
+                }
+            }
+            requestAnimationFrame(detectFace);
         }
-        requestAnimationFrame(detectFace);
+
+        detectFace();
+    } catch (error) {
+        console.error("Error initializing face detection:", error);
     }
-    detectFace();
 }
